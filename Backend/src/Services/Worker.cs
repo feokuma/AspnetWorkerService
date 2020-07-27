@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AspnetWorkerService.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace AspnetWorkerService.Services
 {
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILoggerAdapter<Worker> _logger;
         private readonly IConfiguration _configuration;
 
-        public Worker(ILogger<Worker> logger, 
+        public Worker(ILoggerAdapter<Worker> logger, 
             IConfiguration configuration)
         {
             _logger = logger;
