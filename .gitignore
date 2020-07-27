@@ -5,6 +5,10 @@
 !.vscode/extensions.json
 *.code-workspace
 
+*.ionide/
+.ionide/*
+.ionide/
+
 # Local History for Visual Studio Code
 .history/
 
@@ -37,6 +41,8 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+
+appsettings.Development.json
 
 # Visual Studio 2015
 .vs/
