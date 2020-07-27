@@ -19,6 +19,11 @@ namespace AspnetWorkerService.Services
             _configuration = configuration;
         }
 
+        public override async Task StartAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("AspnetWorkerService started");
+        }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
