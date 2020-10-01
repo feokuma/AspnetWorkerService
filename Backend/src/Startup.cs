@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using AspnetWorkerService.Infrastructure;
+using AspnetWorkerService.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Microsoft.Identity.Client;
 
 namespace AspnetWorkerService
 {
@@ -26,6 +22,16 @@ namespace AspnetWorkerService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddLogging();
+            services.AddSingleton((serviceProvider) =>
+            {
+                return PublicClientApplicationBuilder
+                    .Create(Configuration["MicrosoftGraph:ClientId"])
+                    .WithTenantId(Configuration["MicrosoftGraph:TenantId"])
+                    .WithRedirectUri($"http://localhost")
+                    .Build();
+            });
+            services.AddHostedService<Worker>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
